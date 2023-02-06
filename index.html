@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Corona Cases on Map </title>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css'/>
+    <link rel="icon" href="favicon.ico?v=2">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .head{
+            display: flex;
+            background-color: black;
+            color: white;
+            width: 100vw;
+
+        }
+
+        h1{
+            padding: 15px;
+            font-size: 3rem;
+        }
+
+        img{
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+        }
+
+        #geocoder{
+            width: 350px;
+            position: absolute;
+            right: 20px;
+            top:25px;
+        
+        }
+
+        .mapboxgl-ctrl-geocoder{
+            width: 100%;
+            padding:0px;
+            font-size: 1.2rem;
+        }
+
+        .mapboxgl-ctrl-geocoder--icon-search{
+             width: 25px;
+             height: 25px;
+        }
+
+        .mapboxgl-ctrl-geocoder--input{
+            padding: 10px 50px;
+            height: 40px;
+        }
+
+        .btn{
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1.3rem;
+            border-radius: 5px;
+            height: 44px;
+            position: absolute;
+            top: 23px;
+            right: 387px;
+        }
+
+       
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="head">
+        <a href="#"><img src="logo.jpg" alt="Logo"></a>
+        <h1>My Map</h1>
+        <button class="btn">Turn on your location</button>
+        <p id="demo"></p>
+        <div id="geocoder"></div>
+        
+    </div>
+    <div id='map'></div>
+    
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWs0MjAiLCJhIjoiY2xja2hsdGMwMGd4bDNubzFmOHNleDE4cyJ9.wSXCZqwsO0mvlB6q50TmVQ';
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: [78.6569, 22.9734], // starting position [lng, lat]
+            zoom: 5
+        });
+    </script>
+    
+
+
+
+    <script src="index.js"></script>
+    <script>
+          var x = document.getElementById("demo");
+
+          const getLocation= ()=>{
+              const status = document.querySelector('.status');
+              
+              const success=(position)=>{
+                 console.log(position)
+              }
+
+              const error= ()=>{
+                  status.textContent='Unable to retrive your location';
+              }
+
+              navigator.geolocation.getCurrentPosition(success, error);
+
+
+          }
+
+          document.querySelector('.btn').addEventListener('click',getLocation);      
+
+    </script>
+    
+</body>
+
+
+
+</html>
